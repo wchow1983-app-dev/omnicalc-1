@@ -1,11 +1,12 @@
-<div>
-  APR
-</div>
+<form action="/payment/results">
+  <label for="apr_input">APR</label>
+  <input id="apr_input" type="text" placeholder="E.g. 5.42" name="apr_user_input">
 
-<div>
-  Number of years
-</div>
+  <label for="number_years_input">Number of years</label>
+  <input id="number_years_input" type="text" placeholder="How many years to repay" name="years_user_input">
 
-<div>
-  Principal
-</div>
+  <label for="principal_input">Principal</label>
+  <input id="principal_input" type="text" placeholder="How much principal" name="principal_user_input">
+
+  <button>Calculate monthly payment</button>
+</form>

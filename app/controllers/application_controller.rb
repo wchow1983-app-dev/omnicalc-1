@@ -41,11 +41,28 @@ class ApplicationController < ActionController::Base
     render ({ :template => "calculation_templates/square_results.html.erb"})
   end
 
+#we can use the Math tool Ruby provides to different equations towards user input values (ie Math.sqrt(@num)).  
+
   def calculate_square_root
+      
+    @num = params.fetch("square_root_user_input").to_f
+    @square_root_of_num = Math.sqrt(@num)
+    
     render ({ :template => "calculation_templates/square_root_results.html.erb"})
   end
 
   def calculate_payment
+
+    @apr = params.fetch("apr_user_input").to_f / 100
+    @apr_percentage = "#{(@apr * 100).round(4)}%"
+    @number_years = params.fetch("years_user_input").to_f
+    @principal = params.fetch("principal_user_input").to_f
+    @principal_currency = "$#{@principal}"
+    @numerator = @apr / 12 * @principal
+    @denominator = 1-((1+@apr / 12)**(-1 * @number_years * 12))
+    @payment = (@numerator / @denominator).round(2)
+    @payment_currency = "#{@payment}"
+
     render ({ :template => "calculation_templates/payment_results.html.erb"})
   end
 
