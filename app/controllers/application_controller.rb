@@ -1,3 +1,33 @@
+#for custom controller files, make sure the name of the controller Class (e.g. "ApplicationController" 
+#as named in the "routes.rb" file), is correctly done. Use CamelCase. Otherwise, we may see an error 
+#message "uninitialized constant...". 
+
 class ApplicationController < ActionController::Base
 
+#we are instructng whether we are using a layout.
+
+  layout("wrapper.html.erb")
+
+#we are defining each of the methods we created for our routes in "routes.rb". Specifically, we are
+#instructing the method to render some HTML. However, the HTML  is placed in each specific form 
+#template from our "app/views" folder.
+
+#for each render instruction, in "app/views", create the folder "calculation_templates" and form 
+#"square_form.html.erb". 
+
+  def blank_square_form
+    render ({ :template => "calculation_templates/square_form.html.erb"})
+  end
+
+  def blank_square_root_form
+    render ({ :template => "calculation_templates/square_root_form.html.erb"})
+  end
+
+    def blank_payment_form
+    render ({ :template => "calculation_templates/payment_form.html.erb"})
+  end
+
+  def blank_random_form
+    render ({ :template => "calculation_templates/random_form.html.erb"})
+  end
 end
