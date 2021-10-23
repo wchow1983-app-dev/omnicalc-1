@@ -51,17 +51,23 @@ class ApplicationController < ActionController::Base
     render ({ :template => "calculation_templates/square_root_results.html.erb"})
   end
 
+#lines 60-62: fetching the input values and converting the Strings to Float.
+#lines 64-66: computing the calculations based on the values provided in lines 60-62.
+#lines 68-70: providing the formating for percentages and currency. 
+
   def calculate_payment
 
-    @apr = params.fetch("apr_user_input").to_f / 100
-    @apr_percentage = "#{(@apr * 100).round(4)}%"
+    @apr = params.fetch("apr_user_input").to_f
     @number_years = params.fetch("years_user_input").to_f
     @principal = params.fetch("principal_user_input").to_f
-    @principal_currency = "$#{@principal}"
-    @numerator = @apr / 12 * @principal
-    @denominator = 1-((1+@apr / 12)**(-1 * @number_years * 12))
-    @payment = (@numerator / @denominator).round(2)
-    @payment_currency = "#{@payment}"
+
+    @numerator = @apr / 100 / 12 * @principal
+    @denominator = 1-((1+@apr / 100 / 12)**(-1 * @number_years * 12))
+    @payment = (@numerator / @denominator)
+
+    @apr = @apr.to_s(:percentage, { :precision => 4 } )
+    @principal = @principal.to_s(:currency)
+    @payment = @payment.to_s(:currency, {:precision => 2})
 
     render ({ :template => "calculation_templates/payment_results.html.erb"})
   end
