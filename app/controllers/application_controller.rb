@@ -49,7 +49,15 @@ class ApplicationController < ActionController::Base
     render ({ :template => "calculation_templates/payment_results.html.erb"})
   end
 
+#for random numbers within a range use "a..b" where "a" = lower number and "b" = upper number.  
+# "a..b" includes the value "b", and "a...b" doesn't include the value "b"".
+
   def calculate_random
+
+    @lower = params.fetch("min_user_input").to_f
+    @upper = params.fetch("max_user_input").to_f
+    @random_result = rand(@lower..@upper)
+
     render ({ :template => "calculation_templates/random_results.html.erb"})
   end
 end
