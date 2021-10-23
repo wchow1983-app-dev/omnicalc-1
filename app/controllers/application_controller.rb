@@ -30,4 +30,26 @@ class ApplicationController < ActionController::Base
   def blank_random_form
     render ({ :template => "calculation_templates/random_form.html.erb"})
   end
+  
+#render instructions for the result pages.
+
+  def calculate_square
+    
+    @num = params.fetch("square_user_input").to_f
+    @square_of_num = @num ** 2
+    
+    render ({ :template => "calculation_templates/square_results.html.erb"})
+  end
+
+  def calculate_square_root
+    render ({ :template => "calculation_templates/square_root_results.html.erb"})
+  end
+
+  def calculate_payment
+    render ({ :template => "calculation_templates/payment_results.html.erb"})
+  end
+
+  def calculate_random
+    render ({ :template => "calculation_templates/random_results.html.erb"})
+  end
 end

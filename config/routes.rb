@@ -13,4 +13,14 @@ Rails.application.routes.draw do
   
   get("/random/new", {:controller => "application", :action => "blank_random_form"})
 
+#routes for the result pages.
+
+  get("/square/results", {:controller => "application", :action => "calculate_square"})
+    
+  get("/square_root/results", {:controller => "application", :action => "calculate_square_root"})
+
+  get("/payment/results", {:controller => "application", :action => "calculate_payment"})
+
+  get("/random/results", {:controller => "application", :action => "calculate_random"})
+
 end
